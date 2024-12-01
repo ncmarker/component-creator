@@ -1,0 +1,157 @@
+{
+  "users": [
+    {
+      "username": "john_doe",
+      "password": "$2a$04$AXpFUjoSmMhp1Wm12gBbWu1gUrT54JfQqutotHG1C/HB0q8wyqb7.",
+      "first_name": "John",
+      "last_name": "Doe",
+      "id": 1
+    },
+    {
+      "username": "ncmarker",
+      "password": "113459eb7bb31bddee85ade5230d6ad5d8b2fb52879e00a84ff6ae1067a210d3",
+      "first_name": "nick",
+      "last_name": "marker",
+      "id": 2
+    },
+    {
+      "username": "test",
+      "password": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+      "first_name": "test",
+      "last_name": "test",
+      "id": 3
+    }
+  ],
+  "components": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "name": "CustomButton",
+      "type": "button",
+      "created_at": "2024-11-01T12:30:00"
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "name": "CustomButton3",
+      "type": "button",
+      "created_at": "2024-11-01T12:30:00"
+    },
+    {
+      "id": 3,
+      "user_id": 3,
+      "name": "CustomButton4",
+      "type": "button",
+      "created_at": "2024-11-01T12:30:00"
+    },
+    {
+      "id": 4,
+      "user_id": 3,
+      "name": "CustomImage",
+      "type": "button",
+      "created_at": "2024-11-01T12:30:00"
+    },
+    {
+      "id": 8,
+      "user_id": 3,
+      "name": "EndBtn",
+      "type": "button",
+      "created_at": "2024-11-01T12:30:00"
+    }
+  ],
+  "component_info": [
+    {
+      "id": 8,
+      "component_id": 8,
+      "attributes": {
+        "name": "EndBtn",
+        "type": "button",
+        "text": "click me",
+        "text_color": "white",
+        "border_radius": "12",
+        "bg_color": "green",
+        "text_size": "14",
+        "size": "medium"
+      }
+    }
+  ],
+  "component_code": [
+    {
+      "id": 8,
+      "component_id": 8,
+      "code": "export default function EndBtn(props) {\n    const text = props.text || 'click me';\n    const bgColor = props.bgColor || 'green';\n    const fontColor = props.fontColor || 'white';\n    const borderRadius = props.borderRadius || '12';\n    const textSize = props.textSize || '14';\n    const padding = props.padding || '8px 16px';\n\n    return (\n        <button\n            type={props.type || \"button\"}\n            style={{\n                backgroundColor: bgColor,\n                color: fontColor,\n                borderRadius: borderRadius,\n                fontSize: textSize,\n                padding: padding,\n                border: 'none',\n                cursor: 'pointer',\n            }}\n            onClick={props.onClick}\n        >\n            {text}\n        </button>\n    );\n}"
+    }
+  ],
+  "saved_inspiration": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "id": 3,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "id": 4,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "id": 5,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "id": 6,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "id": 7,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "id": 8,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "id": 9,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "user_id": 3,
+      "image_url": "https://images.unsplash.com/photo-1531161339673-a943dd10e29f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHwyfHxBcHAlMjBTY3JlZW5zfGVufDB8fHx8MTczMjgzMzE3OHww&ixlib=rb-4.0.3&q=80&w=400",
+      "id": 10
+    },
+    {
+      "user_id": 3,
+      "image_url": "https://images.unsplash.com/photo-1554260570-83dc2f46ef79?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHwxfHxBcHAlMjBTY3JlZW5zfGVufDB8fHx8MTczMjgzMzE3OHww&ixlib=rb-4.0.3&q=80&w=400",
+      "id": 11
+    },
+    {
+      "id": 9,
+      "user_id": 3,
+      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+    },
+    {
+      "user_id": 3,
+      "image_url": "https://images.unsplash.com/photo-1531161339673-a943dd10e29f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHwyfHxBcHAlMjBTY3JlZW5zfGVufDB8fHx8MTczMjgzMzE3OHww&ixlib=rb-4.0.3&q=80&w=400",
+      "id": 10
+    },
+    {
+      "user_id": 3,
+      "image_url": "https://images.unsplash.com/photo-1554260570-83dc2f46ef79?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHwxfHxBcHAlMjBTY3JlZW5zfGVufDB8fHx8MTczMjgzMzE3OHww&ixlib=rb-4.0.3&q=80&w=400",
+      "id": 11
+    }
+  ]
+}

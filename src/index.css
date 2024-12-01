@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.gradient-background {
+    background: linear-gradient(135deg, #83ACFF, #3B7CFF); /* 135deg for diagonal gradient */
+    min-height: 100vh; /* Ensure it covers the viewport height */
+    width: 100%; /* Ensure it covers the viewport width */
+    margin: 0; /* Remove default body margin */
+    padding: 0;
+}
+
+.card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.07);
+    margin: 60px;
+    margin-top: 30px;
+    padding: 40px;
+    min-height: 690px;
+}
+
+.card-no-spacing {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.07);
+    padding: 40px;
+}
