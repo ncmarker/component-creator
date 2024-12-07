@@ -24,111 +24,114 @@
   ],
   "components": [
     {
-      "id": 1,
-      "user_id": 3,
-      "name": "CustomButton",
+      "user_id": "3",
+      "name": "MyButton",
       "type": "button",
-      "created_at": "2024-11-01T12:30:00"
+      "created_at": "2024-12-01T16:35:51",
+      "id": 1
     },
     {
-      "id": 2,
-      "user_id": 3,
-      "name": "CustomButton3",
-      "type": "button",
-      "created_at": "2024-11-01T12:30:00"
+      "user_id": "3",
+      "name": "MyImage",
+      "type": "image",
+      "created_at": "2024-12-01T16:38:59",
+      "id": 2
     },
     {
-      "id": 3,
-      "user_id": 3,
-      "name": "CustomButton4",
-      "type": "button",
-      "created_at": "2024-11-01T12:30:00"
+      "user_id": "3",
+      "name": "MyInput",
+      "type": "input",
+      "created_at": "2024-12-01T16:39:17",
+      "id": 3
     },
     {
-      "id": 4,
-      "user_id": 3,
-      "name": "CustomImage",
+      "user_id": "3",
+      "name": "SubmitBtn",
       "type": "button",
-      "created_at": "2024-11-01T12:30:00"
-    },
-    {
-      "id": 8,
-      "user_id": 3,
-      "name": "EndBtn",
-      "type": "button",
-      "created_at": "2024-11-01T12:30:00"
+      "created_at": "2024-12-01T16:39:56",
+      "id": 4
     }
   ],
   "component_info": [
     {
-      "id": 8,
-      "component_id": 8,
+      "component_id": "1",
       "attributes": {
-        "name": "EndBtn",
+        "name": "MyButton",
         "type": "button",
-        "text": "click me",
-        "text_color": "white",
+        "text": "click",
+        "text_color": "black",
         "border_radius": "12",
         "bg_color": "green",
         "text_size": "14",
         "size": "medium"
-      }
+      },
+      "id": 1
+    },
+    {
+      "component_id": "2",
+      "attributes": {
+        "name": "MyImage",
+        "type": "image",
+        "alt": "profile pic",
+        "border_color": "grey",
+        "border_radius": "12",
+        "size": "large"
+      },
+      "id": 2
+    },
+    {
+      "component_id": "3",
+      "attributes": {
+        "name": "MyInput",
+        "type": "input",
+        "placeholder": "search...",
+        "text_color": "black",
+        "bg_color": "white",
+        "border_color": "grey",
+        "border_radius": "12",
+        "size": "small"
+      },
+      "id": 3
+    },
+    {
+      "component_id": "4",
+      "attributes": {
+        "name": "SubmitBtn",
+        "type": "button",
+        "text": "Submit",
+        "text_color": "white",
+        "border_radius": "12",
+        "bg_color": "black",
+        "text_size": "16",
+        "size": "large"
+      },
+      "id": 4
     }
   ],
   "component_code": [
     {
-      "id": 8,
-      "component_id": 8,
-      "code": "export default function EndBtn(props) {\n    const text = props.text || 'click me';\n    const bgColor = props.bgColor || 'green';\n    const fontColor = props.fontColor || 'white';\n    const borderRadius = props.borderRadius || '12';\n    const textSize = props.textSize || '14';\n    const padding = props.padding || '8px 16px';\n\n    return (\n        <button\n            type={props.type || \"button\"}\n            style={{\n                backgroundColor: bgColor,\n                color: fontColor,\n                borderRadius: borderRadius,\n                fontSize: textSize,\n                padding: padding,\n                border: 'none',\n                cursor: 'pointer',\n            }}\n            onClick={props.onClick}\n        >\n            {text}\n        </button>\n    );\n}"
+      "component_id": "1",
+      "code": "export default function MyButton(props) {\n    const text = props.text || 'click';\n    const bgColor = props.bgColor || 'green';\n    const fontColor = props.fontColor || 'black';\n    const borderRadius = props.borderRadius || '12';\n    const textSize = props.textSize || '14';\n    const padding = props.padding || '8px 16px';\n\n    return (\n        <button\n            type={props.type || \"button\"}\n            style={{\n                backgroundColor: bgColor,\n                color: fontColor,\n                borderRadius: borderRadius,\n                fontSize: textSize,\n                padding: padding,\n                border: 'none',\n                cursor: 'pointer',\n            }}\n            onClick={props.onClick}\n        >\n            {text}\n        </button>\n    );\n}",
+      "id": 1
+    },
+    {
+      "component_id": "2",
+      "code": "export default function MyImage(props) {\n    const alt = props.alt || 'profile pic';\n    const borderColor = props.borderColor || 'grey';\n    const borderRadius = props.borderRadius || '12';\n    const width = props.width || '128px;\n    const height = props.height || '128px;\n\n    return (\n        <img \n            src={props.src || \"https://mtek3d.com/wp-content/uploads/2018/01/image-placeholder-500x500-300x300.jpg\"}\n            alt={props.alt || alt}\n            style={{\n                borderRadius: borderRadius,\n                borderColor: borderColor,\n                borderWidth: '2px',\n                objectFit: 'cover',\n                width: width,\n                height: height\n            }}\n        />\n    );\n}",
+      "id": 2
+    },
+    {
+      "component_id": "3",
+      "code": "export default function MyInput(props) {\n    const placeholder = props.placeholder || 'search...';\n    const fontColor = props.fontColor || 'black';\n    const bgColor = props.bgColor || 'white';\n    const borderColor = props.borderColor || 'grey';\n    const borderRadius = props.borderRadius || '12';\n    const width = props.width || '96px;\n    const height = props.height || '32px;\n    const fontSize = props.fontSize || '14px;\n\n    return (\n        <input\n            type='text'\n            placeholder={placeholder}\n            style={{\n                color: fontColor,\n                backgroundColor: bgColor,\n                borderColor: borderColor,\n                borderRadius: borderRadius,\n                fontSize: fontSize,\n                height: height,\n                width: width,\n                borderWidth: '2px',\n                padding: '8px',\n                outline: 'none',\n            }}\n            value={props.value}\n            onChange={props.onChange}\n        />\n    );\n}",
+      "id": 3
+    },
+    {
+      "component_id": "4",
+      "code": "export default function SubmitBtn(props) {\n    const text = props.text || 'Submit';\n    const bgColor = props.bgColor || 'black';\n    const fontColor = props.fontColor || 'white';\n    const borderRadius = props.borderRadius || '12';\n    const textSize = props.textSize || '16';\n    const padding = props.padding || '10px 20px';\n\n    return (\n        <button\n            type={props.type || \"button\"}\n            style={{\n                backgroundColor: bgColor,\n                color: fontColor,\n                borderRadius: borderRadius,\n                fontSize: textSize,\n                padding: padding,\n                border: 'none',\n                cursor: 'pointer',\n            }}\n            onClick={props.onClick}\n        >\n            {text}\n        </button>\n    );\n}",
+      "id": 4
     }
   ],
   "saved_inspiration": [
     {
-      "id": 1,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
-      "id": 2,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
-      "id": 3,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
-      "id": 4,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
-      "id": 5,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
-      "id": 6,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
-      "id": 7,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
-      "id": 8,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
-      "id": 9,
-      "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-    },
-    {
       "user_id": 3,
       "image_url": "https://images.unsplash.com/photo-1531161339673-a943dd10e29f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHwyfHxBcHAlMjBTY3JlZW5zfGVufDB8fHx8MTczMjgzMzE3OHww&ixlib=rb-4.0.3&q=80&w=400",
       "id": 10
@@ -139,19 +142,14 @@
       "id": 11
     },
     {
-      "id": 9,
       "user_id": 3,
-      "image_url": "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
+      "image_url": "https://images.unsplash.com/photo-1521931961826-fe48677230a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHwzfHxBcHAlMjBidXR0b25zfGVufDB8fHx8MTczMzA5NzUwN3ww&ixlib=rb-4.0.3&q=80&w=400",
+      "id": 12
     },
     {
       "user_id": 3,
-      "image_url": "https://images.unsplash.com/photo-1531161339673-a943dd10e29f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHwyfHxBcHAlMjBTY3JlZW5zfGVufDB8fHx8MTczMjgzMzE3OHww&ixlib=rb-4.0.3&q=80&w=400",
-      "id": 10
-    },
-    {
-      "user_id": 3,
-      "image_url": "https://images.unsplash.com/photo-1554260570-83dc2f46ef79?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHwxfHxBcHAlMjBTY3JlZW5zfGVufDB8fHx8MTczMjgzMzE3OHww&ixlib=rb-4.0.3&q=80&w=400",
-      "id": 11
+      "image_url": "https://images.unsplash.com/photo-1517404215738-15263e9f9178?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODEwNzN8MHwxfHNlYXJjaHw2fHxBcHAlMjBTY3JlZW5zfGVufDB8fHx8MTczMzA5NTE0MHww&ixlib=rb-4.0.3&q=80&w=400",
+      "id": 13
     }
   ]
 }

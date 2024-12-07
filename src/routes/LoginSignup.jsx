@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import Navigation from "../Navigation";
@@ -7,6 +7,11 @@ function LoginSignup() {
     const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Signup
     const [formData, setFormData] = useState({ username: "", password: "", first_name: "", last_name: "" });
     const navigate = useNavigate();
+
+    // set page title
+    useEffect(() => {
+        document.title = "Login";
+    }, []);
 
     // Hashing a password
     const hashPassword = (password) => {

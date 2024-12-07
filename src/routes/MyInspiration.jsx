@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { FiTrash } from "react-icons/fi";
 
 
@@ -7,6 +8,9 @@ export function MyInspiration() {
 
     // fetches all components on load
     useEffect(() => {
+        // set page title
+        document.title = "My Inspiration";
+
         fetch(`${process.env.REACT_APP_BACKEND_URL}/saved_inspiration`)
         .then((res) => res.json())
         .then((json) => {
@@ -27,6 +31,7 @@ export function MyInspiration() {
         })
         .then((res) => {
             const myInspo = savedInspo.filter((i) => i.id !== id);
+            toast.success("successfully deleted saved inspiration photo");
             setSavedInspo(myInspo);
         })
         .catch((err) => console.error(err))

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Searchbar from "../components/Searchbar";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import TrashButton from "../components/TrashButton";
 import handleNewComponent from "../helper_function/handleNewComponent";
@@ -13,10 +14,13 @@ export function MyComponents() {
 
     // fetches all components on load
     useEffect(() => {
+        // set page title
+        document.title = "My Components";
+ 
         fetch(`${process.env.REACT_APP_BACKEND_URL}/components`)
         .then((res) => res.json())
         .then((json) => {
-            const mycomponents = json.filter((c) => c.user_id === Number(sessionStorage.getItem('currentUser')));
+            const mycomponents = json.filter((c) => Number(c.user_id) === Number(sessionStorage.getItem('currentUser')));
             setDisplayedComponents(mycomponents);
             setOriginalComponents(mycomponents);
         })
@@ -25,6 +29,7 @@ export function MyComponents() {
 
     // removes deleted result from display
     function onDelete(id) {
+        toast.success("successfully deleted component");
         const mycomponents = displayedComponents.filter((c) => c.id !== id);
         setDisplayedComponents(mycomponents);
         setOriginalComponents(mycomponents);
@@ -59,8 +64,6 @@ export function MyComponents() {
                     onClick={() => {
                         handleNewComponent()
                         .then((json) => {
-                            // console.log(json);
-                            // sessionStorage.setItem('currentComponentInfoId', JSON.stringify(json.component_id))
                             navigate('/createcomponent');
                         })
                         .catch((err) => console.error(err))
@@ -105,7 +108,7 @@ export function MyComponents() {
     );
 }
 
-function EditButton({ componentId }) {
+export function EditButton({ componentId }) {
     const navigate = useNavigate();
 
     return (

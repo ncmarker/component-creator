@@ -18,7 +18,7 @@ export default function CodeSampleButton({ attributes, code, setCode }) {
         const padding = size === 'small' ? '6px 12px' : size === 'medium' ? '8px 16px' : '10px 20px';
     
         indentedCode = attributes.type ? `
-export default function ${attributes.name}(props) {
+export default function ${name}(props) {
     const text = props.text || '${text}';
     const bgColor = props.bgColor || '${bg_color}';
     const fontColor = props.fontColor || '${text_color}';
@@ -61,7 +61,7 @@ export default function ${attributes.name}(props) {
         const height = size === 'small' ? '64px' : size === 'medium' ? '96px' : '128px';
     
         indentedCode = attributes.type ? `
-export default function ${attributes.name}(props) {
+export default function ${name}(props) {
     const alt = props.alt || '${alt}';
     const borderColor = props.borderColor || '${border_color}';
     const borderRadius = props.borderRadius || '${border_radius}';
@@ -103,7 +103,7 @@ export default function ${attributes.name}(props) {
         const fontSize = size === 'small' ? '14px' : size === 'medium' ? '16px' : '18px';
     
         indentedCode = attributes.type ? `
-export default function ${attributes.name}(props) {
+export default function ${name}(props) {
     const placeholder = props.placeholder || '${placeholder}';
     const fontColor = props.fontColor || '${text_color}';
     const bgColor = props.bgColor || '${bg_color}';

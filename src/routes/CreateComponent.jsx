@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import { TextInput } from "../components/TextInput";
 import { DropdownInput } from "../components/DropdownInput";
+import { toast } from "react-toastify";
 import LiveComponentRender from "../components/LiveComponentRender";
-
-import CodeSampleButton from "../helper_function/CodeSampleButton";
+import CodeSampleButton from "../components/CodeSampleButton";
+import ButtonAttributes from "../components/ButtonAttributes";
+import ImageAttributes from "../components/ImageAttributes";
+import InputAttributes from "../components/InputAttributes";
 
 
 export function CreateComponent() {
@@ -21,8 +24,14 @@ export function CreateComponent() {
         }
     );
 
-    console.log(componentData);
+    const [errors, setErrors] = useState({});
 
+    // set page title
+    useEffect(() => {
+        document.title = "Create Component";
+    }, []);
+
+    // handles when the component type is changed, transitions to different component data and retains common attributes
     function handleTypeChange(e) {
         if (e.target.value === 'button') {
             setComponentData({
@@ -60,21 +69,55 @@ export function CreateComponent() {
         }
     }
 
+    // handles when data in the form is changed (component attributes)
     function handleChange(e) {
         setComponentData({ ...componentData, [e.target.name]: e.target.value });
     };
 
-    function handleSaveChanges(id) {
-        const hasEmptyValue = Object.values(componentData).some(value => value === "");
-        if (hasEmptyValue) {
-            alert("You must fill in all input fields.")
-            return;
+    // validates form inputs before sending to backend
+    function validateForm() {
+        const newErrors = {};
+        
+        if (!componentData.name) newErrors.name = "Name is required.";
+        if (!componentData.type) newErrors.type = "Type is required.";
+
+        if (componentData.type === 'button') {
+            if (!componentData.text) newErrors.text = "Text is required.";
+            if (!componentData.text_color) newErrors.text_color = "Text color is required.";
+            if (!componentData.border_radius) newErrors.border_radius = "Border radius is required.";
+            if (!componentData.bg_color) newErrors.bg_color = "Background color is required.";
+            if (!componentData.text_size) newErrors.text_size = "Text size is required.";
+            if (!componentData.size) newErrors.size = "Size is required.";
         }
+        else if (componentData.type === 'image') {
+            if (!componentData.alt) newErrors.alt = "Alt text is required.";
+            if (!componentData.border_color) newErrors.border_color = "Border color is required.";
+            if (!componentData.border_radius) newErrors.border_radius = "Border radius is required.";
+            if (!componentData.size) newErrors.size = "Size is required.";
+        }
+        else if (componentData.type === 'input') {
+            if (!componentData.placeholder) newErrors.placeholder = "Placeholder is required.";
+            if (!componentData.text_color) newErrors.text_color = "Text color is required.";
+            if (!componentData.bg_color) newErrors.bg_color = "Background color is required.";
+            if (!componentData.border_color) newErrors.border_color = "Border color is required.";
+            if (!componentData.border_radius) newErrors.border_radius = "Border radius is required.";
+            if (!componentData.size) newErrors.size = "Size is required.";
+        }
+
+        setErrors(newErrors);
+
+        // return if errors or not
+        return Object.keys(newErrors).length === 0;
+    }
+
+    // handles when a specific component is saved, updating its data in the 'database'
+    function handleSaveChanges(id) {
+        if (!validateForm()) return;
 
         // begin showing live render
         setShowRenderCode(true);
         
-        // PUT /components/id 
+        // PUT /components/id, saved component basic info (name, type)
         fetch(`${process.env.REACT_APP_BACKEND_URL}/components/${id}`, {
             method: 'PATCH',
             headers: {
@@ -87,7 +130,7 @@ export function CreateComponent() {
         })
         .catch((err) => console.error(err));
 
-        // PUT /component_info/component_id
+        // PUT /component_info/component_id, saves component's attribute data
         fetch(`${process.env.REACT_APP_BACKEND_URL}/component_info/${currComponentId}`, {
             method: 'PATCH',
             headers: {
@@ -99,7 +142,7 @@ export function CreateComponent() {
         })
         .catch((err) => console.error(err));
 
-        // PUT /component_code/component_id
+        // PUT /component_code/component_id, saves component's code
         fetch(`${process.env.REACT_APP_BACKEND_URL}/component_code/${currComponentId}`, {
             method: 'PATCH',
             headers: {
@@ -110,6 +153,8 @@ export function CreateComponent() {
             })
         })
         .catch((err) => console.error(err));
+
+        toast.success("component successfully saved");
     }
 
 
@@ -127,6 +172,7 @@ export function CreateComponent() {
                         label = "Component Name"
                         placeholder="MyComponent"
                         name="name"
+                        error={errors.name}
                     />
                     <DropdownInput
                         value={componentData.type}
@@ -134,12 +180,13 @@ export function CreateComponent() {
                         options={['button', 'image', 'input']}
                         label="Component Type"
                         name="type"
+                        error={errors.type}
                     />
                 </div>
                 <div className="flex flex-row gap-8">
-                    {componentData.type === 'button' && <ButtonAttributes componentData={componentData} handleChange={handleChange} />}
-                    {componentData.type === 'image' && <ImageAttributes componentData={componentData} handleChange={handleChange} />}
-                    {componentData.type === 'input' && <InputAttributes componentData={componentData} handleChange={handleChange} />}
+                    {componentData.type === 'button' && <ButtonAttributes componentData={componentData} handleChange={handleChange} errors={errors} />}
+                    {componentData.type === 'image' && <ImageAttributes componentData={componentData} handleChange={handleChange} errors={errors} />}
+                    {componentData.type === 'input' && <InputAttributes componentData={componentData} handleChange={handleChange} errors={errors} />}
                 </div>
                 {componentData.type && 
                 <>
@@ -166,154 +213,5 @@ export function CreateComponent() {
             </div>
         </div>
 
-    );
-}
-
-
-function ButtonAttributes({componentData, handleChange}) {
-    return(
-        <>
-        <div className="flex flex-col gap-4 w-1/2">
-            <TextInput 
-                value={componentData.text} 
-                onChange={handleChange}
-                label = "Default Text"
-                placeholder="ex. Click Me"
-                name="text"
-            />
-            <TextInput 
-                value={componentData.font_color} 
-                onChange={handleChange}
-                label = "Default Font Color"
-                placeholder="ex. black"
-                name="text_color"
-            />
-            <TextInput 
-                value={componentData.border_radius} 
-                onChange={handleChange}
-                label = "Default Border Radius (in pixels)"
-                placeholder="ex. 12"
-                name="border_radius"
-            />
-
-        </div>
-        <div className="flex flex-col gap-4 w-1/2">
-            <TextInput 
-                value={componentData.bg_color} 
-                onChange={handleChange}
-                label = "Default Background Color"
-                placeholder="ex. green"
-                name="bg_color"
-            />
-            <TextInput 
-                value={componentData.text_size} 
-                onChange={handleChange}
-                label = "Default Font Size (in pixels)"
-                placeholder="ex. 14"
-                name="text_size"
-            />
-            <DropdownInput
-                value={componentData.size}
-                onChange={handleChange}
-                options={['small', 'medium', 'large']}
-                label="Default Size"
-                name="size"
-            />
-        </div>
-        </>
-    );
-}
-
-
-function ImageAttributes({componentData, handleChange}) {
-    return (
-        <>
-            <div className="flex flex-col gap-4 w-1/2">
-                <TextInput 
-                    value={componentData.alt} 
-                    onChange={handleChange}
-                    label = "Default Alt Text"
-                    placeholder="ex. profile photo"
-                    name="alt"
-                />
-                <TextInput 
-                    value={componentData.border_color} 
-                    onChange={handleChange}
-                    label = "Default Border Color"
-                    placeholder="ex. grey"
-                    name="border_color"
-                />
-            </div>
-            <div className="flex flex-col gap-4 w-1/2">
-                <TextInput 
-                    value={componentData.border_radius} 
-                    onChange={handleChange}
-                    label = "Default Border Radius (in pixels)"
-                    placeholder="ex. 12"
-                    name="border_radius"
-                />
-                <DropdownInput
-                    value={componentData.size}
-                    onChange={handleChange}
-                    options={['small', 'medium', 'large']}
-                    label="Default Size"
-                    name="size"
-                />
-            </div>
-        </>
-    );
-}
-
-
-function InputAttributes({componentData, handleChange}) {
-    return (
-        <>
-            <div className="flex flex-col gap-4 w-1/2">
-                <TextInput 
-                    value={componentData.placeholder} 
-                    onChange={handleChange}
-                    label = "Default Placeholder"
-                    placeholder="ex. search..."
-                    name="placeholder"
-                />
-                <TextInput 
-                    value={componentData.text_color} 
-                    onChange={handleChange}
-                    label = "Default Text Color"
-                    placeholder="ex. black"
-                    name="text_color"
-                />
-                <TextInput 
-                    value={componentData.bg_color} 
-                    onChange={handleChange}
-                    label = "Default Background Color"
-                    placeholder="ex. white"
-                    name="bg_color"
-                />
-            </div>
-            <div className="flex flex-col gap-4 w-1/2">
-                <TextInput 
-                    value={componentData.border_radius} 
-                    onChange={handleChange}
-                    label = "Default Border Radius (in pixels)"
-                    placeholder="ex. 12"
-                    name="border_radius"
-                />
-                <TextInput 
-                    value={componentData.border_color} 
-                    onChange={handleChange}
-                    label = "Default Border Color"
-                    placeholder="ex. grey"
-                    name="border_color"
-                />
-                <DropdownInput
-                    value={componentData.size}
-                    onChange={handleChange}
-                    options={['small', 'medium', 'large']}
-                    label="Default Size"
-                    name="size"
-                />
-            </div>
-        </>
     );
 }

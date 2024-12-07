@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Searchbar from "../components/Searchbar";
 
 
 export function FindInspiration() {
     const [searchTerm, setSearchTerm] = useState("App Screens");
     const [inspo, setInspo] = useState([]);
+
+    // set page title
+    useEffect(() => {
+        document.title = "Find Inspiration";
+    }, []);
 
     // dynamically updates inspiration results based on search term
     useEffect(() => {
@@ -35,6 +41,7 @@ export function FindInspiration() {
                 "image_url": url
             }),
         })
+        .then((res) => toast.success("successfully saved inspiration photo."))
         .catch((err) => console.error(err));
     }
 
